@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class DynamicObjectData
+public struct DynamicObjectData
 {
     public List<string> attributes;
     public string model_name;
@@ -10,7 +10,7 @@ public class DynamicObjectData
 }
 
 [Serializable]
-public class Position
+public struct Position
 {
     public int x;
     public int y;
