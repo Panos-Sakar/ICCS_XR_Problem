@@ -4,16 +4,31 @@ using System.Collections.Generic;
 [Serializable]
 public struct SpawnedObjectData
 {
-    public int object_id; 
+    public int object_id;
+
     public double x;
     public double y;
     public double z;
-    public Header header;
+
+    //Omitted
+    //public Header header;
+    
+#if VISUALIZE_CONTOUR_POINTS
     public List<ContourPoint> contour_points;
-    public int bin_id;
-    public int n_objects;
-    public double object_area;
-    public double total_area;
+#endif
+
+    //Omitted
+    //public int bin_id;
+
+    //Omitted
+    //public int n_objects;
+
+    //Omitted
+    //public double object_area;
+
+    //Omitted
+    //public double total_area;
+    
     public double velocity;
 }
 

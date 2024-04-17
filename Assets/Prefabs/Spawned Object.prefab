@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6154929653324607052}
   - component: {fileID: 632195814385377379}
-  - component: {fileID: 6960570944698213428}
-  - component: {fileID: 8705261735129269486}
+  - component: {fileID: 3450962820067230306}
+  - component: {fileID: 8704857462548876110}
   m_Layer: 0
-  m_Name: Spawned Object (Mesh)
+  m_Name: Spawned Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739801aa33882c3cfacb79f60092586f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!33 &6960570944698213428
+  _movementMode: 0
+  _velocityScale: 1
+  _yOffset: 1
+  _isAdditive: 0
+--- !u!33 &3450962820067230306
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,7 +58,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2440763577674799349}
   m_Mesh: {fileID: 0}
---- !u!23 &8705261735129269486
+--- !u!23 &8704857462548876110
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
