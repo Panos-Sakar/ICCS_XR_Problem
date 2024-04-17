@@ -33,8 +33,8 @@ public class SpawnedObject : MonoBehaviour
 
         //Conversion of Up axis happens here
         _startPosition = new Vector3((float)Data.x, (float)Data.z, (float)Data.y);
-        //if _isAdditive is equal to true, keep original Y value and add _yOffset. Otherwise use _yOffset.
-        _startPosition =  Vector3.up * (_isAdditive? _yOffset + _startPosition.y : _yOffset);
+        //Add _yOffset to start position. If _isAdditive is false, the original y position should be removed first.
+        _startPosition +=  Vector3.up * (_isAdditive? _yOffset : _yOffset - _startPosition.y);
         transform.position = _startPosition;
 
         _meshFilter = GetComponent<MeshFilter>();
@@ -74,12 +74,16 @@ public class SpawnedObject : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }
 
-    private void FixedUpdate()
-    {
         if(_movementMode != MovementMode.Transform) return;
 
-        transform.Translate(transform.forward * (float)(Data.velocity * _velocityScale));
+        transform.Translate(transform.forward * (float)(Data.velocity * _velocityScale) * Time.deltaTime);
     }
+
+    // private void FixedUpdate()
+    // {
+    //     if(_movementMode != MovementMode.Transform) return;
+
+    //     transform.Translate(transform.forward * (float)(Data.velocity * _velocityScale));
+    // }
 }

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementMode: 0
-  _velocityScale: 1
+  _velocityScale: 10
   _yOffset: 1
   _isAdditive: 0
 --- !u!33 &3450962820067230306
