@@ -82,16 +82,17 @@ namespace MockGetRequest
                         break;
 
                     case UnityWebRequest.Result.Success:
-                        DynamicObjectData content = new();
+                        DynamicObjectData content;
                         bool succeeded = false;
                         try
                         {
-                            JsonUtility.FromJsonOverwrite(webRequest.downloadHandler.text, content);
+                            content = JsonUtility.FromJson<DynamicObjectData>(webRequest.downloadHandler.text);
                             succeeded = true;
                         }
                         catch (System.Exception)
                         {
                             _onFail.Invoke($"Deserialization Error from response: {webRequest.downloadHandler.text}");
+                            content = new();
                         }
                         if(succeeded) _onSuccess.Invoke(content);
                         break;
