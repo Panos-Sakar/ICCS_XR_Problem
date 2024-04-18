@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class LabelPool : MonoBehaviour
 {
+    [SerializeField]
+    private Label _labelPrefab;
     public Label GetLabel()
     {
-        var obj = new GameObject();
-        var label = obj.AddComponent<Label>();
+        var label = Instantiate(_labelPrefab);
+        label.Init(this);
         return label;
     }
 

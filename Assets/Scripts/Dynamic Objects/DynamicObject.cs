@@ -68,13 +68,14 @@ public class DynamicObject : MonoBehaviour
 
     private void CreateAttributes()
     {
+        int i = 0;
         foreach (var attribute in Data.attributes)
         {
             var label = _labelPool.GetLabel();
-            label.transform.SetParent(this.transform);
-            label.Show(attribute);
+            label.Show(attribute).Follow(this.transform, new Vector3(0, 0.1f + 0.15f*i, 0));
 
             _labels.Add(label);
+            i++;
         }
     }
 
