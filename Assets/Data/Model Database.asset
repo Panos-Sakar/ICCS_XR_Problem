@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157e79308a443d48cb97ab8288ac965f, type: 3}
+  m_Name: Model Database
+  m_EditorClassIdentifier: 
+  _models:
+  - Object: {fileID: 6569731137646461568, guid: 60009cc0984cfc3de92af0b5433e0ed4,
+      type: 3}
+    Name: chair_b
+  - Object: {fileID: 6735479645954570745, guid: b49780ad59a9af339b731c126737089f,
+      type: 3}
+    Name: crate_tomatoes
+  - Object: {fileID: 3474405693771656417, guid: 813585a1bcb7c05d5adcb26ae881bbcf,
+      type: 3}
+    Name: tree
