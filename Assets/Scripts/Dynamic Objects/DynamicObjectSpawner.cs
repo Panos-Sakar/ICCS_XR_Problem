@@ -25,7 +25,6 @@ public class DynamicObjectSpawner : MonoBehaviour
 
     private void SpawnNewObject(int objectID)
     {
-        Debug.LogWarning($"Loading: {objectID}");
         _mocHandler.Create(objectID).OnSuccess(OnSuccessfulResponse).GET();
     }
 

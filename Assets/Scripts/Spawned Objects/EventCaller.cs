@@ -10,6 +10,7 @@ using UnityEngine.Events;
 public class EventCaller : MonoBehaviour
 {
     public static UnityEvent<SpawnedObjectData> OnSpawnObject { get; private set; } = new();
+    public static float NextSpawnTime { get; private set; }
 
     [SerializeField]
     private string _streamingAssetsSubfolder;
@@ -49,6 +50,8 @@ public class EventCaller : MonoBehaviour
                 Debug.Log($"Found asset: '{assetPath}' object_id: '{itemContent.object_id}'");
             }
         }
+
+        NextSpawnTime = 0;
     }
 
     private void Update()
@@ -61,5 +64,7 @@ public class EventCaller : MonoBehaviour
             var randomObject = _spawnedObjectData[Random.Range(0, _spawnedObjectData.Count)];
             OnSpawnObject.Invoke(randomObject);
         }
+
+        NextSpawnTime = _spawnInterval - _timeSinceLastSpawn;
     }
 }

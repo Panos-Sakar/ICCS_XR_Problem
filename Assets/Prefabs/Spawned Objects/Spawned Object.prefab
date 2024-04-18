@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739801aa33882c3cfacb79f60092586f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementMode: 0
+  _movementMode: 1
   _velocityScale: 10
   _yOffset: 1
   _isAdditive: 0

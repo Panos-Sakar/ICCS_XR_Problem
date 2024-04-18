@@ -7,25 +7,28 @@ public class SpawnedObject : MonoBehaviour
     public static UnityEvent<int> OnSpawnedObjectDestroyed { get; private set; } = new();
     public enum MovementMode
     {
+        None,
         Transform,
         RigidBody,
     }
 
     public SpawnedObjectData Data { get; private set; }
+    public Vector3 StartPosition {get; private set;}
+    //Cashed value to show on the debug inspector
+    public double velocity {get; private set;}
     
     [Header("Movement")]
     [SerializeField]
     private MovementMode _movementMode;
     [SerializeField]
-    public float _velocityScale = 1f;
+    private float _velocityScale = 1f;
 
     [Header("Y Offset")]
     [SerializeField]
     private float _yOffset = 1f;
     [SerializeField]
-    public bool _isAdditive = false;
+    private bool _isAdditive = false;
     
-    private Vector3 _startPosition;
     private MeshFilter _meshFilter;
 
     public void Init(SpawnedObjectData data, Mesh objectMesh)
@@ -34,10 +37,12 @@ public class SpawnedObject : MonoBehaviour
         gameObject.name = $"Object-{Data.object_id}";
 
         //Conversion of Up axis happens here
-        _startPosition = new Vector3((float)Data.x, (float)Data.z, (float)Data.y);
+        StartPosition = new Vector3((float)Data.x, (float)Data.z, (float)Data.y);
         //Add _yOffset to start position. If _isAdditive is false, the original y position should be removed first.
-        _startPosition +=  Vector3.up * (_isAdditive? _yOffset : _yOffset - _startPosition.y);
-        transform.position = _startPosition;
+        StartPosition +=  Vector3.up * (_isAdditive? _yOffset : _yOffset - StartPosition.y);
+        transform.position = StartPosition;
+
+        velocity = Data.velocity;
 
         _meshFilter = GetComponent<MeshFilter>();
         _meshFilter.mesh = objectMesh;
@@ -46,7 +51,7 @@ public class SpawnedObject : MonoBehaviour
         {
             var rigidBody = gameObject.AddComponent<Rigidbody>();
             rigidBody.useGravity = false;
-            rigidBody.velocity = transform.forward * (float)(Data.velocity * _velocityScale);
+            rigidBody.velocity = transform.forward * (float)(velocity * _velocityScale);
         }
 
 #if VISUALIZE_CONTOUR_POINTS
@@ -71,7 +76,7 @@ public class SpawnedObject : MonoBehaviour
 
     private void Update()
     {
-        if(transform.position.z - _startPosition.z >= 2f)
+        if(transform.position.z - StartPosition.z >= 2f)
         {
             Destroy(gameObject);
             return;
@@ -79,7 +84,7 @@ public class SpawnedObject : MonoBehaviour
 
         if(_movementMode != MovementMode.Transform) return;
 
-        transform.Translate(transform.forward * (float)(Data.velocity * _velocityScale) * Time.deltaTime);
+        transform.Translate(transform.forward * (float)(velocity * _velocityScale) * Time.deltaTime);
     }
 
     private void OnDestroy()
