@@ -40,8 +40,6 @@ public class DynamicObjectSpawner : MonoBehaviour
 
         var dynamicObject =  newModel.AddComponent<DynamicObject>();
         dynamicObject.Init(data, _labelPool);
-        
-        newModel.AddComponent<BoundingBoxDebug>();
 
         _spawnedObjects.Add(data.model_name, dynamicObject);
     }
