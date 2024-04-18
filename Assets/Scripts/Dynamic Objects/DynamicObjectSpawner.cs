@@ -39,8 +39,19 @@ public class DynamicObjectSpawner : MonoBehaviour
         var newModel = Instantiate(_modelDatabase.GetModelByName(data.model_name));
 
         var dynamicObject =  newModel.AddComponent<DynamicObject>();
-        dynamicObject.Init(data, _labelPool);
+        dynamicObject.Init(data, _labelPool).OnDestroyRequest.AddListener(OnDestroyRequest);
 
         _spawnedObjects.Add(data.model_name, dynamicObject);
+    }
+
+    private void OnDestroyRequest(DynamicObject obj)
+    {
+        if(_spawnedObjects.ContainsKey(obj.Data.model_name))
+        {
+            _spawnedObjects.Remove(obj.Data.model_name);
+        }
+        
+        obj.OnDestroyRequest.RemoveAllListeners();
+        Destroy(obj.gameObject);
     }
 }
