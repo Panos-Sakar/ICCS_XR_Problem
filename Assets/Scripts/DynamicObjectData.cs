@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public struct DynamicObjectData
 {
     public List<string> attributes;
     public string model_name;
-    public Position position;
+    public Vector3 position;
 }
 
 [Serializable]

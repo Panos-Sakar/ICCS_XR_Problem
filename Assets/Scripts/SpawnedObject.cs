@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(MeshFilter))]
 public class SpawnedObject : MonoBehaviour
 {
+    public static UnityEvent<int> OnSpawnedObjectDestroyed { get; private set; } = new();
     public enum MovementMode
     {
         Transform,
@@ -78,6 +80,11 @@ public class SpawnedObject : MonoBehaviour
         if(_movementMode != MovementMode.Transform) return;
 
         transform.Translate(transform.forward * (float)(Data.velocity * _velocityScale) * Time.deltaTime);
+    }
+
+    private void OnDestroy()
+    {
+        OnSpawnedObjectDestroyed.Invoke(Data.object_id);
     }
 
     // private void FixedUpdate()
