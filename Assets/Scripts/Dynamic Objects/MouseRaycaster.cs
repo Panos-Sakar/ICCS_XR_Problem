@@ -6,8 +6,6 @@ public class MouseRaycaster : MonoBehaviour
     private LayerMask _raycastMask;
     [SerializeField]
     private float _maxRaycastDistance = 100f;
-    [SerializeField]
-    private bool _drawDebugRay;
 
     private void Update()
     {
@@ -22,12 +20,6 @@ public class MouseRaycaster : MonoBehaviour
         {
             var dynamicObject = hit.collider.gameObject.GetComponent<DynamicObject>();
             if(dynamicObject != null) dynamicObject.DestroyMe();
-        }
-
-        if(_drawDebugRay)
-        {
-            var distance = hit.distance < 0.01? _maxRaycastDistance : hit.distance;
-            Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
         }
     }
 }

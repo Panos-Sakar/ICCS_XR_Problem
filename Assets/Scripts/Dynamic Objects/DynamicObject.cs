@@ -28,8 +28,6 @@ public class DynamicObject : MonoBehaviour
 
         gameObject.layer = LayerMask.NameToLayer("DynamicObjects");
 
-        CreateAttributes();
-
         return this;
     }
 
@@ -48,7 +46,6 @@ public class DynamicObject : MonoBehaviour
         //Calculate the desired scale
         _boundingBox = BoundBoxTools.GetMeshBoundBox(this.gameObject);
         var scaleFactor = BoundBoxTools.CalculateScaleFactor(_boundingBox, 0.5f);
-        Debug.Log($"Scale: {scaleFactor} BB: {_boundingBox.size}");
         _targetScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
 
         var boxCollider =gameObject.AddComponent<BoxCollider>();
@@ -63,18 +60,20 @@ public class DynamicObject : MonoBehaviour
     private void OnDestroy()
     {
         DestroyAttributes();
-
     }
 
     private void CreateAttributes()
     {
-        int i = 0;
+        int i = 1;
+        var nextAngle = 2*Mathf.PI/Data.attributes.Count;
+        var angle  = 0f;
         foreach (var attribute in Data.attributes)
         {
             var label = _labelPool.GetLabel();
-            label.Show(attribute).Follow(this.transform, new Vector3(0, 0.1f + 0.15f*i, 0));
+            label.Show(attribute).Follow(this.transform, new Vector2(angle, 0.4f)); //new Vector3(0, 0.1f + 0.15f*i, 0)
 
             _labels.Add(label);
+            angle += nextAngle;
             i++;
         }
     }
@@ -100,6 +99,7 @@ public class DynamicObject : MonoBehaviour
         {
             _lerpToTargetScale = false;
             transform.localScale = _targetScale;
+            CreateAttributes();
         }
         else
         {

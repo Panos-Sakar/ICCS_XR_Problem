@@ -5,20 +5,67 @@ public class LabelPool : MonoBehaviour
 {
     [SerializeField]
     private Label _labelPrefab;
-    public Label GetLabel()
+    [SerializeField]
+    private int _capacity = 10;
+
+    private Queue<Label> _availableLabels = new();
+    private List<Label> _inUseLabel = new(); 
+
+    private void Start()
+    {
+        for (int i = 0; i < _capacity; i++)
+        {
+            CreateLabel();
+        }
+    }
+
+    private void CreateLabel()
     {
         var label = Instantiate(_labelPrefab);
         label.Init(this);
+        _availableLabels.Enqueue(label);
+    }
+
+    public Label GetLabel()
+    {
+        if(_availableLabels.Count <= 0)
+        {
+            Debug.LogWarning($"[LabelPool] Capacity reached! Creating a new one", this);
+            CreateLabel();
+        }
+        
+        var label = _availableLabels.Dequeue();
+        label.ResetLabel();
+        _inUseLabel.Add(label);
+
         return label;
     }
 
     public void ReturnLabel(Label label)
     {
-        Destroy(label.gameObject);
+        if(_inUseLabel.Contains(label))
+        {
+            _inUseLabel.Remove(label);
+            _availableLabels.Enqueue(label);
+        }
+        else
+        {
+            Debug.LogWarning($"[LabelPool] Trying to return unknown label", label.gameObject);
+        }
     }
 
     public void LabelDestroyed(Label label)
     {
-        Debug.LogWarning($"Please do not destroy pooled objects! Call the ReturnToPool() function instead!");
+        Debug.LogWarning($"[LabelPool] Please do not destroy pooled objects! Call the ReturnToPool() function instead!", this);
+
+        if(_inUseLabel.Contains(label))
+        {
+            _inUseLabel.Remove(label);
+        }
+        
+        if(_availableLabels.Contains(label))
+        {
+            Debug.LogWarning($"[LabelPool] Label in available queue destroyed. Dequeue can return null object", this);
+        }
     }
 }
