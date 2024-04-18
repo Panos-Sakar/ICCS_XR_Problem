@@ -1,0 +1,17 @@
+{
+  "name": "com.iccs.mock-get-request",
+  "version": "1.0.0",
+  "displayName": "Mock Get Request",
+  "description": "This is a pakage for mocking get requests",
+  "unity": "2022.3",
+  "unityRelease": "24f1",
+  "documentationUrl": "https://example.com/",
+  "dependencies": {
+  },
+  "keywords": [
+  ],
+  "author": {
+    "name": "Sakaridis Panagioits",
+    "email": "panosxsakar@gmail.com"
+  }
+}
