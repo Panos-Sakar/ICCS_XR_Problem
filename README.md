@@ -48,8 +48,17 @@ For the events, an "Event System" was used to decouple scripts from each other. 
 ### Contur Points
 
 <p>
-  The provided JSON files have a field called "contour_points" which holds 2D point data. 
+  The provided JSON files have a field called "contour_points" which holds 2D point data. When atempting to visualize the data in Unity the following results were produced:
+  <p align="center">
+    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/.github/ReadmeImages/Image00001.png">
+    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/.github/ReadmeImages/Image00003.png">
+    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/.github/ReadmeImages/Image00006.png">
+  </p> 
 </p>
+
+>[!NOTE]
+> * Project Settings > Player > Other Settings > Scripting Define Symbols : VISUALIZE_CONTOUR_POINTS
+> * Assets > Prefabs > Spawned Objects > Spawned Object (Line Renderer)
 
 <br>
 <br>
