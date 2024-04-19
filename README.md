@@ -47,7 +47,7 @@ For the events, an "Event System" was used to decouple scripts from each other. 
   ObjectSpawner.cs listens for the create object event from the EventSystem and instantiates an object depending on the "object_id". The object that is spawned has the "SpawnedObject.cs" component, which is responsible for setting up, moving and deleting the object.
 </p>
 
-### Contur Points
+### Contour Points
 
 <p>
   The provided JSON files have a field called "contour_points" which holds 2D point data. When attempting to visualize the data in Unity the following results were produced:
@@ -57,12 +57,12 @@ For the events, an "Event System" was used to decouple scripts from each other. 
     <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/ReadmeImages/Image00003.png">
     <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/ReadmeImages/Image00006.png">
   </p>
-  These points don't seem to display andy meaningful shape and instead of using them, one of the default Unity meshes was used as visual for the Spawned Objects.
+  These points don't seem to display any meaningful shape and instead of using them, one of the default Unity meshes was used as visual for the Spawned Objects.
 </p>
 <br>
 
 >[!NOTE]
-> You can bring back the Contur Point visualisation by changing the following:
+> You can bring back the Contour Point visualisation by changing the following:
 > * In "Project Settings > Player > Other Settings > Scripting Define Symbols" add a new Symbol with the string: ```VISUALIZE_CONTOUR_POINTS```
 > * On the "Object Spawner" prefab inside the scene, change the "Object Prefab" reference with the prefab "Assets > Prefabs > Spawned Objects > Spawned Object (Line Renderer)"
 
