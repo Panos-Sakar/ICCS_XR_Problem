@@ -16,7 +16,7 @@
 
 Created using: [Unity](https://unity.com/) version [2022.3.24f1](https://unity.com/releases/editor/whats-new/2022.3.24)
 <br>
-Platform: Should work on any platform the Unity game engine supports. (Tested on [Debian Linux](https://www.debian.org/))
+Platform: Should work on any platform the Unity game engine supports except Android ans WebGL (see [Notes](#task-1#notes) for more). (Tested on [Debian Linux](https://www.debian.org/))
 
 
 ```bash
@@ -66,18 +66,20 @@ For the events, an "Event System" was used to decouple scripts from each other. 
 
 <br>
 
+### Notes
+
+* On Android and WebGL reading from Streaming Assets should use an web call, and thus this project will need a bit of modification to read the JSON files.
+* Every asset and script with the name "Spawned Object" refers to an object from Task 1
+
 ## Task 2
 
+Relevant Scene: Assets > Scenes > Task 2.unity
 <br>
+
+Here the purpose of the task is to make an http call to a server, every time an object from Task 1 is destroyed. Depending on the response from the web call, spawn an object at a designated position, resize it and add labels with the contents of attributes provided within the http response.
+
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+The EventSystem is also a dependansy here and should be included in the scene. The "Event Caller" and "Object Spawner" are also nedded, in order to spawn objects, but are not required. If another script calls the apropriate event this portion of the project will work fine.
 
 # Attributions
 
