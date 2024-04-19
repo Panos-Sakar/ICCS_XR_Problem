@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Utility Component to make Scene loading easy.
-/// <br>
 /// Provide <see cref="_sceneLoadButtons"/> with UI button references
 /// through the Inspector to load a scene by Build Index
 /// </summary>

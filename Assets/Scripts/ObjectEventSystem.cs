@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// A singleton class that holds events for creating and destroying Objects
+/// Also a convenient place to check for an exit command (Escape Key)
+/// </summary>
 public class ObjectEventSystem : MonoBehaviour
 {
     public static ObjectEventSystem Current;
@@ -12,6 +16,7 @@ public class ObjectEventSystem : MonoBehaviour
 
     private void Awake()
     {
+        //Only one object with this component is allowed
         if(Current != null)
         {
             Destroy(this.gameObject);

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Reads and displays the "NextSpawnTime" reading.
+/// Depends on <see cref="ObjectEventSystem.cs"/> to function.
+/// </summary>
 public class DebugCanvasManager : MonoBehaviour
 {
     [SerializeField]

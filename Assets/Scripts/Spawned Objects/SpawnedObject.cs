@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// This component sets up the object and moves it trough space.
+/// All other necessary components that are required are created by this script except the MeshRenderer and MeshFilter to draw the object.
+/// </summary>
 [RequireComponent(typeof(MeshFilter))]
 public class SpawnedObject : MonoBehaviour
 {
@@ -46,6 +50,7 @@ public class SpawnedObject : MonoBehaviour
         _meshFilter = GetComponent<MeshFilter>();
         _meshFilter.mesh = objectMesh;
 
+        //Add a rigid body if MovementMode requires it
         if(_movementMode == MovementMode.RigidBody)
         {
             var rigidBody = gameObject.AddComponent<Rigidbody>();
@@ -90,11 +95,4 @@ public class SpawnedObject : MonoBehaviour
     {
         ObjectEventSystem.Current.OnSpawnedObjectDestroyed.Invoke(Data.object_id);
     }
-
-    // private void FixedUpdate()
-    // {
-    //     if(_movementMode != MovementMode.Transform) return;
-
-    //     transform.Translate(transform.forward * (float)(Data.velocity * _velocityScale));
-    // }
 }

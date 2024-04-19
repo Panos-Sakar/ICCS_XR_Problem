@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Creates a SpawnedObject if an event from <see cref="ObjectEventSystem.cs"/> was called.
+/// Depends on <see cref="ObjectEventSystem.cs"/> to function.
+/// </summary>
 public class ObjectSpawner : MonoBehaviour
 {
     [Serializable]
@@ -45,7 +48,7 @@ public class ObjectSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Mesh with ID: {data.object_id} not found");
+            Debug.LogError($"[ObjectSpawner] Mesh with ID: {data.object_id} not found", this);
         }
 
     }

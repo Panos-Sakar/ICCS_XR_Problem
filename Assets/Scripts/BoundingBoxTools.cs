@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Provides functions to calculate the bounding box of an objects based on all Mesh data and scale factors to resize an object to fit in another bounding box.
+/// </summary>
 public static class BoundBoxTools
 {
     public static Bounds GetMeshBoundBox(GameObject gameObject)
@@ -7,14 +10,15 @@ public static class BoundBoxTools
         var meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
         var boundsCenter = Vector3.zero;
         
+        //Center is the average of all centers
         foreach (var meshRenderer in meshRenderers)
         {
             boundsCenter += meshRenderer.bounds.center;
         }
-
         boundsCenter /= meshRenderers.Length;
+        
+        //Calculate overall bounding box
         var boundBox = new Bounds(boundsCenter, Vector3.zero);
-
         foreach (var meshRenderer in meshRenderers)
         {
             boundBox.Encapsulate(meshRenderer.bounds);

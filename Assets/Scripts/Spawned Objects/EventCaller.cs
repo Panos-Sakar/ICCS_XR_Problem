@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// Reads JSON files from Streaming Assets folder in "<see cref="_streamingAssetsSubfolder"/>".
@@ -37,14 +36,14 @@ public class EventCaller : MonoBehaviour
                 catch (System.Exception)
                 {
                     //If any error is occurred, Ignore the file
-                    Debug.LogWarning($"Could not load asset at: {assetPath}");
+                    Debug.LogWarning($"[EventCaller] Could not load asset at: {assetPath}", this);
                     continue;
                 }
 
                 //Blindly adds element on list. Does not check for duplicates. 
                 //Other struct should be used if duplicate check is required
                 _spawnedObjectData.Add(itemContent);
-                Debug.Log($"Found asset: '{assetPath}' object_id: '{itemContent.object_id}'");
+                Debug.Log($"[EventCaller] Found asset: '{assetPath}' object_id: '{itemContent.object_id}'", this);
             }
         }
 
