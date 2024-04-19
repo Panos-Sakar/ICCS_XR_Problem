@@ -3,6 +3,10 @@ using MockGetRequest;
 using System.Collections.Generic;
 using UnityEngine.Events;
 
+/// <summary>
+/// This script is responsible for initializing a Dynamic object.
+/// It also creates one label for each attribute provided inside the "Data" struct
+/// </summary>
 public class DynamicObject : MonoBehaviour
 {
     private const float LERP_SPEED = 10;
@@ -26,13 +30,14 @@ public class DynamicObject : MonoBehaviour
         //Move object to position
         transform.position = Data.position;
 
+        //Change layer so the Raycasts can hit this object
         gameObject.layer = LayerMask.NameToLayer("DynamicObjects");
 
         return this;
     }
 
     /// <summary>
-    /// Does not directly destroy this GameObject
+    /// Does not directly destroy this GameObject. The script that created this Object keeps track of the objects and needs to be notified.
     /// </summary>
     public void DestroyMe()
     {
@@ -48,7 +53,8 @@ public class DynamicObject : MonoBehaviour
         var scaleFactor = BoundBoxTools.CalculateScaleFactor(_boundingBox, 0.5f);
         _targetScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
 
-        var boxCollider =gameObject.AddComponent<BoxCollider>();
+        //Add a box collider so the object can be destroyed with RayCasts
+        var boxCollider = gameObject.AddComponent<BoxCollider>();
         boxCollider.center = _boundingBox.center - transform.localPosition;
         boxCollider.size = _boundingBox.size;
 
@@ -80,6 +86,8 @@ public class DynamicObject : MonoBehaviour
             label.Show(attribute).Follow(this.transform, offset);
 
             _labels.Add(label);
+
+            //Update the angle for the next object
             angle += nextAngle;
         }
     }
@@ -88,6 +96,7 @@ public class DynamicObject : MonoBehaviour
     {
         foreach (var label in _labels)
         {
+            //Labels are managed by the pool and may ne destroyed before this object is destroyed
             if(label == null) continue;
             label.ReturnToPool();
         }
@@ -102,6 +111,7 @@ public class DynamicObject : MonoBehaviour
 
     private void LerpScale()
     {
+        //Lerp the scale of the object and when the scale reaches a tolerance, set te scale exactly.
         if(Mathf.Abs(_targetScale.x - transform.localScale.x) < 0.001f)
         {
             _lerpToTargetScale = false;

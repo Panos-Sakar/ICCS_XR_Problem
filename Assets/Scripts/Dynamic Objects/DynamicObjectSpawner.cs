@@ -2,6 +2,10 @@ using UnityEngine;
 using MockGetRequest;
 using System.Collections.Generic;
 
+/// <summary>
+/// Component responsible for creating dynamic objects when a spawned object is destroyed.
+/// Calls a Mock Http Handler to retrieve info about the object to be spawned.
+/// </summary>
 public class DynamicObjectSpawner : MonoBehaviour
 {
     [SerializeField]

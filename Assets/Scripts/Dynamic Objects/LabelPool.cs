@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Creates and manages 3D Labels and provides them to any script than needs one.
+/// </summary>
 public class LabelPool : MonoBehaviour
 {
     [SerializeField]
@@ -63,12 +66,14 @@ public class LabelPool : MonoBehaviour
 
     public void LabelDestroyed(Label label)
     {
+        //If a script destroyed a label, remove it from the list to avoid null refs
         if(_inUseLabel.Contains(label))
         {
             Debug.LogWarning($"[LabelPool] Please do not destroy pooled objects! Call the ReturnToPool() function instead!", this);
             _inUseLabel.Remove(label);
         }
         
+        //Queue should be recreated here to avoid null refs
         if(_availableLabels.Contains(label))
         {
             Debug.LogWarning($"[LabelPool] Label in available queue destroyed. Dequeue can return null object", this);

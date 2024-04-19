@@ -1,6 +1,11 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// A 3D Label to display some text.
+/// If _LookAtCamera is set to true, the label will rotate to face the Main Camera
+/// If the Follow() method is called, the object will follow the provided transform with an additional offset from the _followOffset field.
+/// </summary>
 public class Label : MonoBehaviour
 {
     [SerializeField]
@@ -37,6 +42,7 @@ public class Label : MonoBehaviour
         _textField.text = attribute;
         _textField.ForceMeshUpdate();
 
+        //Updates the width of the background to fit the text mesh object
         var containerSize = _container.sizeDelta;
         containerSize.x = _textField.preferredWidth + 0.1f;
         _container.sizeDelta = containerSize;
@@ -47,6 +53,7 @@ public class Label : MonoBehaviour
 
     public void Follow(Transform transform, Vector3 offset)
     {
+        //Setup an object to follow around
         _updateFollow = true;
         _follow = transform;
         _followOffset = offset;
@@ -63,18 +70,20 @@ public class Label : MonoBehaviour
     {
         if(_updateFollow)
         {
+            //Create a ray from the object to the Main Camera
             var ray = new Ray(_follow.position, (_camera.transform.position - _follow.position).normalized);
             var plane  = new Plane(ray.direction, ray.origin);
-            //plane.
-
-            Debug.DrawRay(ray.origin, ray.direction*10f);
+            //Position the Label 0.2 meters towards the camera
             transform.position =  ray.GetPoint(0.2f);
+            //Add the offset position
             transform.position += _followOffset;
 
             if(_LookAtCamera)
             {
                 transform.LookAt(_camera.transform);
             }
+        
+            Debug.DrawRay(ray.origin, ray.direction*10f);
         }
     }
 

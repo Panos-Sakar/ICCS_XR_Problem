@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Create a scriptable object from this class to use as a database to dynamically spawn objects based on Object Names
+/// </summary>
 [CreateAssetMenu(fileName = "ModelDatabase", menuName = "ICCS/Create Model Database", order = 1)]
 public class ModelObjectDatabase : ScriptableObject
 {
@@ -38,7 +41,7 @@ public class ModelObjectDatabase : ScriptableObject
         {
             if(_availableModels.TryAdd(model.Name, model.Object) == false)
             {
-                Debug.LogError($"Duplicate key: {model.Name}");
+                Debug.LogError($"[DynamicObjectDatabase]  Duplicate key: {model.Name}", this);
             }
         }
     }
