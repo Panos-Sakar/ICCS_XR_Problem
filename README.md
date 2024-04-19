@@ -18,7 +18,6 @@ Created using: [Unity](https://unity.com/) version [2022.3.24f1](https://unity.c
 <br>
 Platform: Should work on any platform the Unity game engine supports except Android and WebGL (see [Notes](#notes) for more). (Tested on [Debian Linux](https://www.debian.org/))
 
-
 ```bash
 # Clone this repository
 $ git clone https://github.com/Panos-Sakar/ICCS_XR_Problem.git
