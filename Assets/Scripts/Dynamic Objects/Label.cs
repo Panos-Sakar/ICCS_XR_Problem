@@ -59,7 +59,7 @@ public class Label : MonoBehaviour
         _followOffset = offset;
 
         UpdatePosition();
-        followTransform.LookAt(_camera.transform);
+        transform.LookAt(_camera.transform);
     }
 
     private void Hide()
