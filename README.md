@@ -115,7 +115,7 @@ For the mocking of http requests a new Unity package was created (Located in Pac
 <br>
 
 ### Notes
-* The fbx models used here are from the [Poly Pizza](https://poly.pizza/m/MSuchZNT2G) website (see [Attributions](#attributions)) and were not modified.
+* The fbx models used here are from the [Poly Pizza](https://poly.pizza) website (see [Attributions](#attributions)) and were not modified.
 * The Raycaster that is used to destroy the objects is using the "Input.GetMouseButtonUp(0)" function. If this project runs on an HMD the raycast may not work properly. Additional checks should be made for this senario.
 
 <br>
