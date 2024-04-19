@@ -16,7 +16,7 @@
 
 Created using: [Unity](https://unity.com/) version [2022.3.24f1](https://unity.com/releases/editor/whats-new/2022.3.24)
 <br>
-Platform: Should work on any platform the Unity game engine supports except Android ans WebGL (see [Notes](#notes) for more). (Tested on [Debian Linux](https://www.debian.org/))
+Platform: Should work on any platform the Unity game engine supports except Android and WebGL (see [Notes](#notes) for more). (Tested on [Debian Linux](https://www.debian.org/))
 
 
 ```bash
