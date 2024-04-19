@@ -21,4 +21,17 @@ public class ObjectEventSystem : MonoBehaviour
         Current = this;
         DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }
