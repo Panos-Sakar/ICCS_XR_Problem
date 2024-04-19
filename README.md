@@ -16,13 +16,16 @@
 
 Created using: [Unity](https://unity.com/) version [2022.3.24f1](https://unity.com/releases/editor/whats-new/2022.3.24)
 <br>
-Platform: Should work on any platform the Unity game engine supports except Android ans WebGL (see [Notes](#task-1#notes) for more). (Tested on [Debian Linux](https://www.debian.org/))
+Platform: Should work on any platform the Unity game engine supports except Android ans WebGL (see [Notes](#notes) for more). (Tested on [Debian Linux](https://www.debian.org/))
 
 
 ```bash
 # Clone this repository
 $ git clone https://github.com/Panos-Sakar/ICCS_XR_Problem.git
 ```
+
+<br>
+<br>
 
 ## Task 1
 
@@ -69,7 +72,11 @@ For the events, an "Event System" was used to decouple scripts from each other. 
 ### Notes
 
 * On Android and WebGL reading from Streaming Assets should use an web call, and thus this project will need a bit of modification to read the JSON files.
-* Every asset and script with the name "Spawned Object" refers to an object from Task 1
+* Every asset and script with the name "Spawned Object" refers to an object from Task 1.
+* The velocity from the JSON files seemed very slow and is multiplyed by 10 to speed things up.
+
+<br>
+<br>
 
 ## Task 2
 
@@ -78,8 +85,41 @@ Relevant Scene: Assets > Scenes > Task 2.unity
 
 Here the purpose of the task is to make an http call to a server, every time an object from Task 1 is destroyed. Depending on the response from the web call, spawn an object at a designated position, resize it and add labels with the contents of attributes provided within the http response.
 
+<p>
+  The EventSystem is also a dependansy here and should be included in the scene. The "Event Caller" and "Object Spawner" are also nedded, in order to spawn objects, but are not required. If another script calls the apropriate event this portion of the project will work fine.
+</p>
+
+<p>
+  The "DynamicObjectSpawner.cs" component is listening for destroy events. Makes the http call to the mock server and spawns the apropriate object. The objects are named "Dynamic Objects" to distinguish them from objects from Task 1. The "DynamicObject.cs" component moves, resizes and animates the new object and gets one Label for each Attribute from the "LabelPool.cs" component. A box collider is also added.
+</p>
+<p>
+  For the Labels, a Pooling System is used to create and provide 3D Labels for any script that needs one.
+  The Labels are rendered with a different camera that is overlapped to the output of the main camera. With this method the Labels are not occluded by other objects.
+</p>
+<p>
+  To destroy DynamicObjects the component "MouseRaycaster.cs" casts a ray when the left mouse button is pressed. If the ray hits a Dinamic Object, the "DestroyMe()" method is called on the object to destroy it. This method also informs the DynamicObjectSpawner for the destruction so another object of the same type can be spawned.
+</p>
+
+### Mock Get Request Pakage
+
+For the mocking of http requests a new Unity package was created (Located in Packages > com.iccs.mock-get-request folder). This package is independent from the rest of the project and can be used to make http requests to the mocking server. The service [Mockable.io](https://www.mockable.io) was used to simulate a server.
+
 <br>
-The EventSystem is also a dependansy here and should be included in the scene. The "Event Caller" and "Object Spawner" are also nedded, in order to spawn objects, but are not required. If another script calls the apropriate event this portion of the project will work fine.
+
+> **Pakage Usage**
+> * Create a GameObject with the MockHandler.cs component to use it.
+> * Call the Create() method to get a Handler.
+> * And then the GET() method on the handler to make the http call.
+> * Use OnSuccess() and OnFail() methods on the handler to receive callbacks.
+
+<br>
+
+### Notes
+* The fbx models used here are from the [Poly Pizza](https://poly.pizza/m/MSuchZNT2G) website (see [Attributions](#attributions)) and were not modified.
+* The Raycaster that is used to destroy the objects is using the "Input.GetMouseButtonUp(0)" function. If this project runs on an HMD the raycast may not work properly. Additional checks should be made for this senario.
+
+<br>
+<br>
 
 # Attributions
 
