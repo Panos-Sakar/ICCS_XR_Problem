@@ -15,12 +15,12 @@ public class DynamicObjectSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        SpawnedObject.OnSpawnedObjectDestroyed.AddListener(SpawnNewObject);
+        ObjectEventSystem.Current.OnSpawnedObjectDestroyed.AddListener(SpawnNewObject);
     }
 
     private void OnDisable()
     {
-        SpawnedObject.OnSpawnedObjectDestroyed.RemoveListener(SpawnNewObject);
+        ObjectEventSystem.Current.OnSpawnedObjectDestroyed.RemoveListener(SpawnNewObject);
     }
 
     private void SpawnNewObject(int objectID)

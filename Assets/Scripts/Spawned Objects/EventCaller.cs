@@ -9,9 +9,6 @@ using UnityEngine.Events;
 /// </summary>
 public class EventCaller : MonoBehaviour
 {
-    public static UnityEvent<SpawnedObjectData> OnSpawnObject { get; private set; } = new();
-    public static float NextSpawnTime { get; private set; }
-
     [SerializeField]
     private string _streamingAssetsSubfolder;
     [SerializeField]
@@ -51,7 +48,7 @@ public class EventCaller : MonoBehaviour
             }
         }
 
-        NextSpawnTime = 0;
+        ObjectEventSystem.Current.NextSpawnTime = 0;
     }
 
     private void Update()
@@ -62,9 +59,9 @@ public class EventCaller : MonoBehaviour
         {
             _timeSinceLastSpawn = 0;
             var randomObject = _spawnedObjectData[Random.Range(0, _spawnedObjectData.Count)];
-            OnSpawnObject.Invoke(randomObject);
+            ObjectEventSystem.Current.OnSpawnObject.Invoke(randomObject);
         }
 
-        NextSpawnTime = _spawnInterval - _timeSinceLastSpawn;
+        ObjectEventSystem.Current.NextSpawnTime = _spawnInterval - _timeSinceLastSpawn;
     }
 }

@@ -23,6 +23,7 @@ public class LabelPool : MonoBehaviour
     {
         var label = Instantiate(_labelPrefab);
         label.Init(this);
+        label.transform.SetParent(this.transform);
         _availableLabels.Enqueue(label);
     }
 
@@ -54,12 +55,17 @@ public class LabelPool : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        _inUseLabel.Clear();
+        _availableLabels.Clear();
+    }
+
     public void LabelDestroyed(Label label)
     {
-        Debug.LogWarning($"[LabelPool] Please do not destroy pooled objects! Call the ReturnToPool() function instead!", this);
-
         if(_inUseLabel.Contains(label))
         {
+            Debug.LogWarning($"[LabelPool] Please do not destroy pooled objects! Call the ReturnToPool() function instead!", this);
             _inUseLabel.Remove(label);
         }
         

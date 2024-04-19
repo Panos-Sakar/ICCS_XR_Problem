@@ -28,12 +28,12 @@ public class ObjectSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        EventCaller.OnSpawnObject.AddListener(SpawnNewObject);
+        ObjectEventSystem.Current.OnSpawnObject.AddListener(SpawnNewObject);
     }
 
     private void OnDisable()
     {
-        EventCaller.OnSpawnObject.RemoveListener(SpawnNewObject);
+        ObjectEventSystem.Current.OnSpawnObject.RemoveListener(SpawnNewObject);
     }
 
     private void SpawnNewObject(SpawnedObjectData data)

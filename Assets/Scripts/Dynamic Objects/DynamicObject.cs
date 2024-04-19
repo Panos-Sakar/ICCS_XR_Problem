@@ -82,6 +82,7 @@ public class DynamicObject : MonoBehaviour
     {
         foreach (var label in _labels)
         {
+            if(label == null) continue;
             label.ReturnToPool();
         }
         _labels.Clear();

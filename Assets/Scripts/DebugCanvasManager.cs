@@ -21,7 +21,7 @@ public class DebugCanvasManager : MonoBehaviour
         if(_timer > _updateInterval)
         {
             _timer = 0;
-            _label.text = $"{_prefix}{EventCaller.NextSpawnTime:00.00}";
+            _label.text = $"{_prefix}{ObjectEventSystem.Current.NextSpawnTime:00.00}";
         }
     }
 }
