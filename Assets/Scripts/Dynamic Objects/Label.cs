@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class Label : MonoBehaviour
@@ -18,7 +17,7 @@ public class Label : MonoBehaviour
 
     private bool _updateFollow;
     private Transform _follow;
-    private Vector2 _followOffset;
+    private Vector3 _followOffset;
 
     public void Init(LabelPool pool)
     {
@@ -46,7 +45,7 @@ public class Label : MonoBehaviour
         return this;
     }
 
-    public void Follow(Transform transform, Vector2 offset)
+    public void Follow(Transform transform, Vector3 offset)
     {
         _updateFollow = true;
         _follow = transform;
@@ -64,16 +63,13 @@ public class Label : MonoBehaviour
     {
         if(_updateFollow)
         {
-            var x = Mathf.Cos(_followOffset.x)*_followOffset.y;
-            var y = Mathf.Sin(_followOffset.x)*_followOffset.y;
-
             var ray = new Ray(_follow.position, (_camera.transform.position - _follow.position).normalized);
             var plane  = new Plane(ray.direction, ray.origin);
             //plane.
 
-            Debug.DrawRay(ray.origin, ray.direction*100f);
-            transform.position =  ray.GetPoint(0.3f);
-            transform.position += new Vector3(x, 0f , y);
+            Debug.DrawRay(ray.origin, ray.direction*10f);
+            transform.position =  ray.GetPoint(0.2f);
+            transform.position += _followOffset;
 
             if(_LookAtCamera)
             {
@@ -86,7 +82,7 @@ public class Label : MonoBehaviour
     {
         _updateFollow = false;
         _follow = null;
-        _followOffset = Vector2.zero;
+        _followOffset = Vector3.zero;
         _textField.text = string.Empty;
     }
 

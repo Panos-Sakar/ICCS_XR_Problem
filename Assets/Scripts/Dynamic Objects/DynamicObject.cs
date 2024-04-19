@@ -64,17 +64,23 @@ public class DynamicObject : MonoBehaviour
 
     private void CreateAttributes()
     {
-        int i = 1;
-        var nextAngle = 2*Mathf.PI/Data.attributes.Count;
         var angle  = 0f;
+        //Calculate angle step on the unit circle based on number of labels
+        var nextAngle = 2*Mathf.PI/Data.attributes.Count;
+
         foreach (var attribute in Data.attributes)
         {
+            //Calculate coordinates around the circle with perimeter 0.3f
+            var perimeter = 0.4f;
+            var x = Mathf.Cos(angle)*perimeter;
+            var y = Mathf.Sin(angle)*perimeter;
+            Vector3 offset = new Vector3(x, 0f , y);
+
             var label = _labelPool.GetLabel();
-            label.Show(attribute).Follow(this.transform, new Vector2(angle, 0.4f)); //new Vector3(0, 0.1f + 0.15f*i, 0)
+            label.Show(attribute).Follow(this.transform, offset);
 
             _labels.Add(label);
             angle += nextAngle;
-            i++;
         }
     }
 
