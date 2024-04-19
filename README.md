@@ -48,24 +48,22 @@ For the events, an "Event System" was used to decouple scripts from each other. 
 ### Contur Points
 
 <p>
-  The provided JSON files have a field called "contour_points" which holds 2D point data. When atempting to visualize the data in Unity the following results were produced:
+  The provided JSON files have a field called "contour_points" which holds 2D point data. When attempting to visualize the data in Unity the following results were produced:
+  
   <p align="center">
-    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/.github/ReadmeImages/Image00001.png">
-    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/.github/ReadmeImages/Image00003.png">
-    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/.github/ReadmeImages/Image00006.png">
-  </p> 
+    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/ReadmeImages/Image00001.png">
+    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/ReadmeImages/Image00003.png">
+    <img width=30% src="https://raw.githubusercontent.com/Panos-Sakar/ICCS_XR_Problem/master/ReadmeImages/Image00006.png">
+  </p>
+  These points don't seem to display andy meaningful shape and instead of using them, one of the default Unity meshes was used as visual for the Spawned Objects.
 </p>
+<br>
 
 >[!NOTE]
-> * Project Settings > Player > Other Settings > Scripting Define Symbols : VISUALIZE_CONTOUR_POINTS
-> * Assets > Prefabs > Spawned Objects > Spawned Object (Line Renderer)
+> You can bring back the Contur Point visualisation by changing the following:
+> * In "Project Settings > Player > Other Settings > Scripting Define Symbols" add a new Symbol with the string: ```VISUALIZE_CONTOUR_POINTS```
+> * On the "Object Spawner" prefab inside the scene, change the "Object Prefab" reference with the prefab "Assets > Prefabs > Spawned Objects > Spawned Object (Line Renderer)"
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 
 ## Task 2
