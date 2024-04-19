@@ -46,18 +46,20 @@ public class Label : MonoBehaviour
         var containerSize = _container.sizeDelta;
         containerSize.x = _textField.preferredWidth + 0.1f;
         _container.sizeDelta = containerSize;
-        gameObject.SetActive(true);
 
+        gameObject.SetActive(true);
         return this;
     }
 
-    public void Follow(Transform transform, Vector3 offset)
+    public void Follow(Transform followTransform, Vector3 offset)
     {
         //Setup an object to follow around
         _updateFollow = true;
-        _follow = transform;
+        _follow = followTransform;
         _followOffset = offset;
 
+        UpdatePosition();
+        followTransform.LookAt(_camera.transform);
     }
 
     private void Hide()
@@ -70,21 +72,26 @@ public class Label : MonoBehaviour
     {
         if(_updateFollow)
         {
-            //Create a ray from the object to the Main Camera
-            var ray = new Ray(_follow.position, (_camera.transform.position - _follow.position).normalized);
-            var plane  = new Plane(ray.direction, ray.origin);
-            //Position the Label 0.2 meters towards the camera
-            transform.position =  ray.GetPoint(0.2f);
-            //Add the offset position
-            transform.position += _followOffset;
+            UpdatePosition();
 
-            if(_LookAtCamera)
+            if (_LookAtCamera)
             {
                 transform.LookAt(_camera.transform);
             }
-        
-            Debug.DrawRay(ray.origin, ray.direction*10f);
         }
+    }
+
+    private void UpdatePosition()
+    {
+        //Create a ray from the object to the Main Camera
+        var ray = new Ray(_follow.position, (_camera.transform.position - _follow.position).normalized);
+        var plane = new Plane(ray.direction, ray.origin);
+        //Position the Label 0.2 meters towards the camera
+        transform.position = ray.GetPoint(0.2f);
+        //Add the offset position
+        transform.position += _followOffset;
+        
+        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.blue);
     }
 
     public void ResetLabel()

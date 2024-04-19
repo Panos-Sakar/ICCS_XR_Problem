@@ -6,6 +6,13 @@ using UnityEngine.Networking;
 
 namespace MockGetRequest
 {
+    /// <summary>
+    /// Provides Mock Http call functionality.
+    /// Create a GameObject with this component to use it.
+    /// Call the Create() method to get a Handler.
+    /// And then the GET() method on the handler to make the http call.
+    /// Use OnSuccess() and OnFail() methods on the handler to receive callbacks.
+    /// </summary>
     public class MockHandler : MonoBehaviour
     {
         [SerializeField]
@@ -29,6 +36,9 @@ namespace MockGetRequest
             return newHandle;
         }
 
+        /// <summary>
+        /// This is a helper class for the MockHandler to manage an individual web request
+        /// </summary>
         public class Handle
         {
             public Handle(string uri, MockHandler owner)
@@ -117,6 +127,9 @@ namespace MockGetRequest
                 Debug.LogError(error);
             }
 
+            /// <summary>
+            /// Used to accept all Web Certificates for test purposes.
+            /// </summary>
             internal class ForceAcceptAll : CertificateHandler
             {
                 protected override bool ValidateCertificate(byte[] certificateData)
